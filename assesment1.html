@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil Saya</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    #form-container {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+    <h1>Profil Saya</h1>
+    <img src="foto_anda.jpg" alt="Foto Anda">
+    <div id="data">
+        <p id="nama"></p>
+        <p id="nim"></p>
+        <p id="kelas"></p>
+    </div>
+
+    <div id="form-container">
+        <label for="jumlah">Jumlah:</label>
+        <input type="number" id="jumlah" name="jumlah" min="1" max="10">
+        
+        <label for="pilihan">Pilihan:</label>
+        <select id="pilihan" name="pilihan">
+            <option value="sherlock">Sherlock</option>
+            <option value="lupin">Lupin</option>
+            <option value="aladin">Aladin</option>
+        </select>
+
+        <button onclick="tampilkanData()">Tampilkan</button>
+    </div>
+
+    <script>
+        // Data Anda
+        const data = {
+            nama: "Zaki Affandi",
+            nim: "6701220083",
+            kelas: "D3SI-46-02"
+        };
+
+        // Array buku
+        let buku = [
+            {"nama": "sherlock", "jumlah":2},
+            {"nama": "lupin", "jumlah":2},
+            {"nama": "aladin", "jumlah":2},
+        ];
+
+        // Mengambil elemen berdasarkan ID
+        const namaElemen = document.getElementById("nama");
+        const nimElemen = document.getElementById("nim");
+        const kelasElemen = document.getElementById("kelas");
+
+        // Mengisi konten dari elemen sesuai dengan data Anda
+        namaElemen.textContent = "Nama: " + data.nama;
+        nimElemen.textContent = "NIM: " + data.nim;
+        kelasElemen.textContent = "Kelas: " + data.kelas;
+
+        // Fungsi untuk menampilkan data
+        function tampilkanData() {
+            const jumlah = document.getElementById("jumlah").value;
+            const pilihan = document.getElementById("pilihan").value;
+
+            if (jumlah.trim() === '') {
+                alert("Jumlah tidak boleh kosong!");
+            } else {
+                let bukuDitemukan = false;
+                let jumlahBuku = 0;
+
+                for (let i = 0; i < buku.length; i++) {
+                    if (buku[i].nama === pilihan) {
+                        bukuDitemukan = true;
+                        jumlahBuku = buku[i].jumlah;
+                        break;
+                    }
+                }
+
+                if (bukuDitemukan) {
+                    if (parseInt(jumlah) > jumlahBuku) {
+                        alert("Jumlah buku tidak tersedia!");
+                    } else {
+                        alert("Silahkan ambil buku Anda");
+                    }
+                } else {
+                    alert("Buku tidak ditemukan!");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
